@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { useWeb3 } from '@3rdweb/hooks'
+import Dashboard from './Dashboard'
 
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
   return (
     <Wrapper>
       {address ? (
-        <h2>{address}</h2>
+        <Dashboard address={address} />
       ) : (
         <WalletConnect>
           <Button onClick={() => connectWallet('injected')}>
@@ -31,12 +32,14 @@ const Wrapper = styled.div`
   display: grid;
   place-items: center;
 `
+
 const WalletConnect = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `
+
 const Button = styled.div`
   border: 1px solid #282b2f;
   padding: 0.8rem;
