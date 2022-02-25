@@ -1,11 +1,51 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { coins } from '../static/coins'
 import Coin from './coin'
 import BalanceChart from './BalanceChart'
+import { TokenModuleMetadata } from '@3rdweb/sdk'
 
-const Portfolio = () => {
+const Portfolio = ({ thirdWebTokens, sanityTokens, walletAddress }) => {
+  const [walletBalance, setWalletBalance] = useState(0)
+  const tokenToUSD = {}
+
+  for (const token of sanityTokens) {
+    tokenToUSD[token.contractAddress] = Number(token.usdPrice)
+  }
+
+  // useEffect(() => {
+  //   const calculateTotalBalance = async () => {
+  //     let total = 0
+  //     for (const token of thirdWebTokens) {
+  //       const balance = await token.balanceOf(walletAddress)
+  //       total += Number(balance.displayValue) * tokenToUSD[token.address]
+  //     }
+  
+  //     setWalletBalance(total)
+  //   }
+
+  //   return calculateTotalBalance()
+  // }, [])
+
+  useEffect(() => {
+    const calculateTotalBalance = async () => {
+      const totalBalance = await Promise.all(
+        thirdWebTokens.map(async token => {
+          const balance = await token.balanceOf(walletAddress)
+          return Number(balance.displayValue) * tokenToUSD[token.address]
+        })
+      )
+
+      setWalletBalance(
+        totalBalance.reduce((acc, curr) => acc + curr, 0)
+      )
+    }
+
+    return calculateTotalBalance()
+  }, [thirdWebTokens, sanityTokens])
+
+  // convert all of my tokens into USD
   return (
     <Wrapper>
       <Content>
@@ -15,8 +55,7 @@ const Portfolio = () => {
               <BalanceTitle>Portfolio balance</BalanceTitle>
               <BalanceValue>
                 {'$'}
-                {/* {walletBalance.toLocaleString()} */}
-                $46,000
+                {walletBalance.toLocaleString()}
               </BalanceValue>
             </Balance>
           </div>
@@ -42,7 +81,7 @@ const Portfolio = () => {
             <Divider />
             <div>
               {coins.map(coin => (
-                <div>
+                <div key={coin.sign}>
                   <Coin coin={coin} />
                   <Divider />
                 </div>
