@@ -5,7 +5,7 @@ import CoinSelector from './CoinSelector'
 import { TailSpin } from 'react-loader-spinner'
 import Receive from './Receive'
 
-const TransferModal = ({ sanityTokens, thirdWebTokens, walletAddress }) => {
+const TransferModal = ({ sanityTokens, thirdWebTokens, walletAddress, walletBalance, setWalletBalance }) => {
   const [action, setAction] = useState('send')
   const [selectedToken, setSelectedToken] = useState(sanityTokens[0])
 
@@ -26,6 +26,8 @@ const TransferModal = ({ sanityTokens, thirdWebTokens, walletAddress }) => {
             setAction={setAction} 
             thirdWebTokens={thirdWebTokens}
             walletAddress={walletAddress}
+            walletBalance={walletBalance}
+            setWalletBalance={setWalletBalance}
           />
         )
       case 'receive':

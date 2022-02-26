@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 Modal.setAppElement('#__next')
 
-const Header = ({ walletAddress, sanityTokens, thirdWebTokens, connectWallet }) => {
+const Header = ({ walletAddress, sanityTokens, thirdWebTokens, walletBalance, setWalletBalance }) => {
   const router = useRouter()
 
   const customStyles = {
@@ -39,7 +39,7 @@ const Header = ({ walletAddress, sanityTokens, thirdWebTokens, connectWallet }) 
         <Button style={{ backgroundColor: '#3773f5', color: '#000' }}>
           Buy / Sell
         </Button>
-        <Link href={'/?transfer=1'}>
+        <Link href={'/?transfer=1'} passHref>
          <Button>Send/ Receive</Button>
         </Link>
       </ButtonsContainer>
@@ -52,6 +52,8 @@ const Header = ({ walletAddress, sanityTokens, thirdWebTokens, connectWallet }) 
           sanityTokens={sanityTokens} 
           thirdWebTokens={thirdWebTokens}
           walletAddress={walletAddress}
+          walletBalance={walletBalance}
+          setWalletBalance={setWalletBalance}
         />
       </Modal>
     </Wrapper>

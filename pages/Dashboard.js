@@ -16,6 +16,7 @@ const sdk = new ThirdwebSDK(
 )
 
 const Dashboard = ({ address }) => {
+  const [walletBalance, setWalletBalance] = useState(0)
   const [sanityTokens, setSanityTokens] = useState([])
   const [thirdWebTokens, setThirdWebTokens] = useState([])
 
@@ -44,11 +45,15 @@ const Dashboard = ({ address }) => {
           walletAddress={address} 
           sanityTokens={sanityTokens} 
           thirdWebTokens={thirdWebTokens}
+          walletBalance={walletBalance}
+          setWalletBalance={setWalletBalance}
         />
         <Main 
           walletAddress={address} 
           sanityTokens={sanityTokens} 
           thirdWebTokens={thirdWebTokens}
+          walletBalance={walletBalance}
+          setWalletBalance={setWalletBalance}
         />
       </MainContainer>
     </Wrapper>

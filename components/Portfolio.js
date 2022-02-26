@@ -4,29 +4,14 @@ import { BsThreeDotsVertical } from 'react-icons/bs'
 import { coins } from '../static/coins'
 import Coin from './coin'
 import BalanceChart from './BalanceChart'
-import { TokenModuleMetadata } from '@3rdweb/sdk'
 
-const Portfolio = ({ thirdWebTokens, sanityTokens, walletAddress }) => {
-  const [walletBalance, setWalletBalance] = useState(0)
+const Portfolio = ({ thirdWebTokens, sanityTokens, walletAddress, walletBalance, setWalletBalance }) => {
+  // const [walletBalance, setWalletBalance] = useState(0)
   const tokenToUSD = {}
 
   for (const token of sanityTokens) {
     tokenToUSD[token.contractAddress] = Number(token.usdPrice)
   }
-
-  // useEffect(() => {
-  //   const calculateTotalBalance = async () => {
-  //     let total = 0
-  //     for (const token of thirdWebTokens) {
-  //       const balance = await token.balanceOf(walletAddress)
-  //       total += Number(balance.displayValue) * tokenToUSD[token.address]
-  //     }
-  
-  //     setWalletBalance(total)
-  //   }
-
-  //   return calculateTotalBalance()
-  // }, [])
 
   useEffect(() => {
     const calculateTotalBalance = async () => {
@@ -131,11 +116,11 @@ const PortfolioTable = styled.div`
   border: 1px solid #282b2f;
 `
 
-const Table = styled.table`
+const Table = styled.div`
   width: 100%;
 `
 
-const TableRow = styled.tr`
+const TableRow = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;

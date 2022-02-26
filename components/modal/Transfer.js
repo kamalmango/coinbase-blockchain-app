@@ -4,12 +4,18 @@ import { FaWallet } from 'react-icons/fa'
 import imageUrlBuilder from '@sanity/image-url'
 import { client } from '../../lib/sanity'
 
-const Transfer = ({ selectedToken, setAction, thirdWebTokens, walletAddress }) => {
+const Transfer = ({ selectedToken, setAction, thirdWebTokens, walletAddress, walletBalance, setWalletBalance }) => {
   const [amount, setAmount] = useState(0)
   const [recipient, setRecipient] = useState('')
   const [imageUrl, setImageUrl] = useState(null)
   const [activeThirdWebToken, setActiveThirdWebToken] = useState()
   const [balance, setBalance] = useState('Fetching...')
+
+  const tokenToUSD = {
+    'SOL': 141,
+    'BTC': 41642,
+    'ETH': 3163
+  }
 
   useEffect(() => {
     const activeToken = thirdWebTokens.find(
@@ -40,8 +46,9 @@ const Transfer = ({ selectedToken, setAction, thirdWebTokens, walletAddress }) =
       const tx = await activeThirdWebToken.transfer(
         recipient, amount.toString().concat('000000000000000000')
       )
-      console.log(tx)
+      console.log('wohoooo', amount)
       setAction('transferred')
+      setWalletBalance(walletBalance - (amount * tokenToUSD[selectedToken.symbol]))
     } else {
       console.error('missing data')
     }
