@@ -46,7 +46,7 @@ const Transfer = ({ selectedToken, setAction, thirdWebTokens, walletAddress, wal
       const tx = await activeThirdWebToken.transfer(
         recipient, amount.toString().concat('000000000000000000')
       )
-      console.log('wohoooo', amount)
+      
       setAction('transferred')
       setWalletBalance(walletBalance - (amount * tokenToUSD[selectedToken.symbol]))
     } else {

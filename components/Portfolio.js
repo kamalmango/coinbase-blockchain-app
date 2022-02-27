@@ -6,7 +6,6 @@ import Coin from './coin'
 import BalanceChart from './BalanceChart'
 
 const Portfolio = ({ thirdWebTokens, sanityTokens, walletAddress, walletBalance, setWalletBalance }) => {
-  // const [walletBalance, setWalletBalance] = useState(0)
   const tokenToUSD = {}
 
   for (const token of sanityTokens) {
