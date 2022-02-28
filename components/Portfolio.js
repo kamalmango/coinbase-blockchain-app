@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { coins } from '../static/coins'
-import Coin from './coin'
+import Coin from './Coin'
 import BalanceChart from './BalanceChart'
 
 const Portfolio = ({ thirdWebTokens, sanityTokens, walletAddress, walletBalance, setWalletBalance }) => {
