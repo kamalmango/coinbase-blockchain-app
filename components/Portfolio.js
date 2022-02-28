@@ -84,6 +84,7 @@ const Wrapper = styled.div`
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
 `
 
 const Content = styled.div`
@@ -93,6 +94,7 @@ const Content = styled.div`
 `
 
 const Chart = styled.div`
+  margin-top: 5rem;
   border: 1px solid #282b2f;
   padding: 1rem 2rem;
 `
